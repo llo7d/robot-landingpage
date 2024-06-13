@@ -1,3 +1,6 @@
+- go from start trough all milestones ( )
+- create milestone 3/4 ()
+
 I changed the index:
 body {
   margin: 0;
