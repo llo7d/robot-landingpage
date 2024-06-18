@@ -1,1 +1,7 @@
-- go from start trough all milestones from 0, save what you curretly have tho ( )
+
+
+- Milestone 5 ( X )
+- Milestone 6 ( )
+
+
+- Go trough all code base from 0 ( )

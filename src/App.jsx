@@ -1,24 +1,25 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
 import { Robot } from './components/Robot';
+import { Stage, OrbitControls, } from '@react-three/drei'
+
+
 
 function App() {
   return (
     <div className="relative w-full h-screen">
       <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-xl z-10">
-        No Tutorials, No Courses
+        No Wall, No e
       </h1>
       <h1 className="absolute top-20 left-1/2 transform -translate-x-1/2 text-xl z-10">
-        justcode
+        Wall-e
       </h1>
-      <Canvas
-        className="absolute top-0 left-0 w-full h-full"
-        camera={{ fov: 45, position: [0, 0, 10] }}
-      >
-        <ambientLight intensity={0.1} />
-        <directionalLight color="red" position={[0, 0, 5]} />
-
-        <Robot />
+      <Canvas flat shadows camera={{ position: [0, 0, 20], fov: 25 }}>
+        <fog attach="fog" args={['black', 15, 22.5]} />
+        <Stage intensity={0.5} environment="studio" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
+          <Robot />
+        </Stage>
+        <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
       </Canvas>
       <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10">
         Press me
