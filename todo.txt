@@ -1,4 +1,4 @@
-
+Changes made only to app.css & app.jsx
 
 - Milestone 5 ( X )
 - Milestone 6 ( )
