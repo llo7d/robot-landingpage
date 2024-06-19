@@ -3,6 +3,37 @@ import { useGLTF } from '@react-three/drei';
 
 export function Robot(props) {
   const { nodes, materials } = useGLTF('/robot-transformed.glb');
+
+  console.log(props.expression);
+
+  const Expression = () => {
+
+    if (props.expression === "Angry") {
+      return (
+        <mesh
+          name="Angry"
+          geometry={nodes.Angry.geometry}
+          material={materials.Expression}
+          morphTargetDictionary={nodes.Angry.morphTargetDictionary}
+          morphTargetInfluences={nodes.Angry.morphTargetInfluences}
+        />
+      )
+
+    } else if (props.expression === "Smile") {
+
+      return (
+        <mesh
+          name="Smile"
+          geometry={nodes.Smile.geometry}
+          material={materials.Expression}
+          morphTargetDictionary={nodes.Smile.morphTargetDictionary}
+          morphTargetInfluences={nodes.Smile.morphTargetInfluences}
+        />
+      )
+    }
+
+  }
+
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -16,13 +47,10 @@ export function Robot(props) {
         rotation={[-0.41, 0, 0.438]}
         scale={0.974}
       />
-      <mesh
-        name="Angry"
-        geometry={nodes.Angry.geometry}
-        material={materials.Expression}
-        morphTargetDictionary={nodes.Angry.morphTargetDictionary}
-        morphTargetInfluences={nodes.Angry.morphTargetInfluences}
-      />
+
+      <Expression />
+
+      {/* 
       <mesh
         name="Cry"
         geometry={nodes.Cry.geometry}
@@ -37,13 +65,7 @@ export function Robot(props) {
         morphTargetDictionary={nodes.Neutral.morphTargetDictionary}
         morphTargetInfluences={nodes.Neutral.morphTargetInfluences}
       />
-      <mesh
-        name="Smile"
-        geometry={nodes.Smile.geometry}
-        material={materials.Expression}
-        morphTargetDictionary={nodes.Smile.morphTargetDictionary}
-        morphTargetInfluences={nodes.Smile.morphTargetInfluences}
-      />
+
       <mesh
         name="Starry"
         geometry={nodes.Starry.geometry}
@@ -51,6 +73,8 @@ export function Robot(props) {
         morphTargetDictionary={nodes.Starry.morphTargetDictionary}
         morphTargetInfluences={nodes.Starry.morphTargetInfluences}
       />
+      */}
+
     </group>
   );
 }
