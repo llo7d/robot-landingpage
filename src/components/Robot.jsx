@@ -7,32 +7,61 @@ export function Robot(props) {
   console.log(props.expression);
 
   const Expression = () => {
+    switch (props.expression) {
+      case "Angry":
+        return (
+          <mesh
+            name="Angry"
+            geometry={nodes.Angry.geometry}
+            material={materials.Expression}
+            morphTargetDictionary={nodes.Angry.morphTargetDictionary}
+            morphTargetInfluences={nodes.Angry.morphTargetInfluences}
+          />
+        );
+      case "Smile":
+        return (
+          <mesh
+            name="Smile"
+            geometry={nodes.Smile.geometry}
+            material={materials.Expression}
+            morphTargetDictionary={nodes.Smile.morphTargetDictionary}
+            morphTargetInfluences={nodes.Smile.morphTargetInfluences}
+          />
+        );
 
-    if (props.expression === "Angry") {
-      return (
-        <mesh
-          name="Angry"
-          geometry={nodes.Angry.geometry}
-          material={materials.Expression}
-          morphTargetDictionary={nodes.Angry.morphTargetDictionary}
-          morphTargetInfluences={nodes.Angry.morphTargetInfluences}
-        />
-      )
+      case "Cry":
+        return (
+          <mesh
+            name="Cry"
+            geometry={nodes.Cry.geometry}
+            material={materials.Expression}
+            morphTargetDictionary={nodes.Cry.morphTargetDictionary}
+            morphTargetInfluences={nodes.Cry.morphTargetInfluences}
+          />
+        )
 
-    } else if (props.expression === "Smile") {
-
-      return (
-        <mesh
-          name="Smile"
-          geometry={nodes.Smile.geometry}
-          material={materials.Expression}
-          morphTargetDictionary={nodes.Smile.morphTargetDictionary}
-          morphTargetInfluences={nodes.Smile.morphTargetInfluences}
-        />
-      )
+      case "Starry":
+        return (
+          <mesh
+            name="Starry"
+            geometry={nodes.Starry.geometry}
+            material={materials.Expression}
+            morphTargetDictionary={nodes.Starry.morphTargetDictionary}
+            morphTargetInfluences={nodes.Starry.morphTargetInfluences}
+          />
+        )
+      default:
+        return (
+          <mesh
+            name="Neutral"
+            geometry={nodes.Neutral.geometry}
+            material={materials.Expression}
+            morphTargetDictionary={nodes.Neutral.morphTargetDictionary}
+            morphTargetInfluences={nodes.Neutral.morphTargetInfluences}
+          />
+        )
     }
-
-  }
+  };
 
   return (
     <group {...props} dispose={null}>
@@ -49,31 +78,6 @@ export function Robot(props) {
       />
 
       <Expression />
-
-      {/* 
-      <mesh
-        name="Cry"
-        geometry={nodes.Cry.geometry}
-        material={materials.Expression}
-        morphTargetDictionary={nodes.Cry.morphTargetDictionary}
-        morphTargetInfluences={nodes.Cry.morphTargetInfluences}
-      />
-      <mesh
-        name="Neutral"
-        geometry={nodes.Neutral.geometry}
-        material={materials.Expression}
-        morphTargetDictionary={nodes.Neutral.morphTargetDictionary}
-        morphTargetInfluences={nodes.Neutral.morphTargetInfluences}
-      />
-
-      <mesh
-        name="Starry"
-        geometry={nodes.Starry.geometry}
-        material={materials.Expression}
-        morphTargetDictionary={nodes.Starry.morphTargetDictionary}
-        morphTargetInfluences={nodes.Starry.morphTargetInfluences}
-      />
-      */}
 
     </group>
   );

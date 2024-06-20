@@ -4,8 +4,10 @@ import { Robot } from './components/Robot';
 import { Stage, OrbitControls, ScrollControls, Html, Scroll } from '@react-three/drei';
 import { useState } from 'react';
 
+
 function App() {
   const [expression, setExpression] = useState("Smile");
+
 
   return (
     <div className="relative w-full h-screen">
@@ -17,8 +19,9 @@ function App() {
         <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
 
         <ScrollControls pages={3.5} distance={1.2} damping={0.1}>
-          <Scroll html style={{ width: '100%' }}>
-            <div className="h-screen flex flex-col justify-between">
+
+          <Scroll html style={{ width: '100%' }} className={"z-[9]"}>
+            <div className="h-screen flex flex-col justify-between z-10">
               <h1 className="text-xl z-10 mt-10">No wall, no e... Wall-e</h1>
               <button
                 className="z-10 mb-10 self-center"
@@ -35,7 +38,7 @@ function App() {
               <h1 className="text-xl z-10 mt-10">Go trash</h1>
               <button
                 className="z-10 mb-10 self-center"
-                onMouseOver={() => setExpression("Happy")}
+                onMouseOver={() => setExpression("Cry")}
                 onMouseLeave={() => setExpression("Smile")}
               >
                 Hello
@@ -46,13 +49,12 @@ function App() {
               <h1 className="text-xl z-10 mt-10">New Section 2</h1>
               <button
                 className="z-10 mb-10 self-center"
-                onMouseOver={() => setExpression("Surprised")}
+                onMouseOver={() => setExpression("Starry")}
                 onMouseLeave={() => setExpression("Smile")}
               >
                 Button 2
               </button>
             </div>
-
 
           </Scroll>
         </ScrollControls>
@@ -60,5 +62,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
