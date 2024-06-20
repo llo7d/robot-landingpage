@@ -1,58 +1,71 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
 import { Robot } from './components/Robot';
-import { Stage, OrbitControls, ScrollControls, Html, Scroll } from '@react-three/drei';
+import { Stage, OrbitControls, Scroll, ScrollControls, Html } from '@react-three/drei'
 import { useState } from 'react';
 
-
 function App() {
+
   const [expression, setExpression] = useState("Smile");
 
-
   return (
+
     <div className="relative w-full h-screen">
       <Canvas flat shadows camera={{ position: [0, 0, 20], fov: 25 }}>
-        <fog attach="fog" args={['black', 15, 22.5]} />
-        <Stage intensity={0.5} environment="studio" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
-          <Robot expression={expression} />
-        </Stage>
-        <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+        <ScrollControls pages={3} distance={1.2} damping={0.1}>
+          <fog attach="fog" args={['black', 15, 22.5]} />
+          <Stage intensity={0.5} environment="studio" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
+            <Robot expression={expression} />
+          </Stage>
+          <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
 
-        <ScrollControls pages={3.5} distance={1.2} damping={0.1}>
+          <Scroll html style={{ width: '100%' }}>
 
-          <Scroll html style={{ width: '100%' }} className={"z-[9]"}>
-            <div className="h-screen flex flex-col justify-between z-10">
-              <h1 className="text-xl z-10 mt-10">No wall, no e... Wall-e</h1>
-              <button
-                className="z-10 mb-10 self-center"
-                onMouseOver={() => setExpression("Angry")}
-                onMouseLeave={() => setExpression("Smile")}
+            <div className="relative w-full h-screen">
+              <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-xl z-10">
+                No Wall, No e
+              </h1>
+              <h1 className="absolute top-20 left-1/2 transform -translate-x-1/2 text-xl z-10">
+                Wall-e
+              </h1>
+
+              <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10"
+                onMouseOver={() => { setExpression("Angry"); }}
+                onMouseLeave={() => { setExpression("Smile") }}
               >
                 Press me
               </button>
             </div>
 
-            <div className="h-[50vh]"></div> {/* Increased spacer between sections */}
+            <div className="relative w-full h-screen">
+              <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-xl z-10">
+                No Wall, No e
+              </h1>
+              <h1 className="absolute top-20 left-1/2 transform -translate-x-1/2 text-xl z-10">
+                Wall-e
+              </h1>
 
-            <div className="h-screen flex flex-col justify-between">
-              <h1 className="text-xl z-10 mt-10">Go trash</h1>
-              <button
-                className="z-10 mb-10 self-center"
-                onMouseOver={() => setExpression("Cry")}
-                onMouseLeave={() => setExpression("Smile")}
+              <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10"
+                onMouseOver={() => { setExpression("Cry"); }}
+                onMouseLeave={() => { setExpression("Smile") }}
               >
-                Hello
+                Press me
               </button>
             </div>
 
-            <div className="h-screen flex flex-col justify-between">
-              <h1 className="text-xl z-10 mt-10">New Section 2</h1>
-              <button
-                className="z-10 mb-10 self-center"
-                onMouseOver={() => setExpression("Starry")}
-                onMouseLeave={() => setExpression("Smile")}
+            <div className="relative w-full h-screen">
+              <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-xl z-10">
+                No Wall, No e
+              </h1>
+              <h1 className="absolute top-20 left-1/2 transform -translate-x-1/2 text-xl z-10">
+                Wall-e
+              </h1>
+
+              <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10"
+                onMouseOver={() => { setExpression("Starry"); }}
+                onMouseLeave={() => { setExpression("Smile") }}
               >
-                Button 2
+                Press me
               </button>
             </div>
 
@@ -62,6 +75,8 @@ function App() {
     </div>
   );
 }
+
+
 
 
 export default App;
