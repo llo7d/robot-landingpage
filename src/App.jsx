@@ -39,10 +39,10 @@ function App() {
 
             <div className="relative w-full h-screen">
               <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-xl z-10">
-                No Wall, No e
+                Coding is hard
               </h1>
               <h1 className="absolute top-20 left-1/2 transform -translate-x-1/2 text-xl z-10">
-                Wall-e
+                I wanto cry
               </h1>
 
               <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10"
@@ -55,10 +55,10 @@ function App() {
 
             <div className="relative w-full h-screen">
               <h1 className="absolute top-10 left-1/2 transform -translate-x-1/2 text-xl z-10">
-                No Wall, No e
+                But it's fun
               </h1>
               <h1 className="absolute top-20 left-1/2 transform -translate-x-1/2 text-xl z-10">
-                Wall-e
+                And you can make money!
               </h1>
 
               <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10"
