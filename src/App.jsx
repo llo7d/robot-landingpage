@@ -17,7 +17,7 @@ function App() {
           <Stage intensity={0.5} environment="studio" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
             <Robot expression={expression} />
           </Stage>
-          <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+          <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableRotate={false} enablePan={false} />
 
           <Scroll html style={{ width: '100%' }}>
 

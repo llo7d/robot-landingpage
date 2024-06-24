@@ -1,10 +1,22 @@
-import React, { useRef } from 'react';
+import * as THREE from 'three';
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export function Robot(props) {
   const { nodes, materials } = useGLTF('/robot-transformed.glb');
 
-  console.log(props.expression);
+
+  const meshRef = useRef(); // Reference to the mesh
+
+  useFrame(({ pointer, viewport }) => {
+    console.log(pointer.x, pointer.y);
+
+    const x = (pointer.x * viewport.width) / 6
+    const y = (pointer.y * viewport.height) / 6
+    meshRef.current.lookAt(x, y, 1)
+  })
+
 
   const Expression = () => {
     switch (props.expression) {
@@ -64,7 +76,7 @@ export function Robot(props) {
   };
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={meshRef}>
       <mesh
         geometry={nodes.Computer_Head.geometry}
         material={materials.Computer}
