@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
@@ -10,34 +10,28 @@ export function Robot(props) {
 
   useFrame(({ pointer, viewport, clock }) => {
 
-
     const elapsedTime = clock.getElapsedTime();
-
     const cycleTime = 2; // Total cycle duration in seconds
     const blinkDuration = 0.15; // Duration of the blink in seconds
-    const phase = (elapsedTime % cycleTime) / cycleTime; // Calculate current phase of the cycle
 
-    // let blink = phase <= (blinkDuration / cycleTime) ? 1 : 0;
+    // To avoid resetting elapsedTime at each cycle, calculate the cycle's phase using % operator
+    const phase = (elapsedTime % cycleTime) / cycleTime;
 
-    // Step 3: Calculate blinking logic
-    let blink;
-    if (phase <= blinkDuration) {
-      // Adjusted to make the blink happen in the first 0.5 seconds
-      if (phase <= blinkDuration / 2) {
-        blink = (phase / (blinkDuration / 2)) * 1; // From 0 to 1
-      } else {
-        blink = 1 - ((phase - (blinkDuration / 2)) / (blinkDuration / 2)); // From 1 back to 0
-      }
+
+    // If the phase is less than the blink duration, blink
+    if (phase <= (blinkDuration / cycleTime)) {
+      nodes.Smile.morphTargetInfluences[0] = 1 // Blink
+
+      // If the phase is greater than the blink duration, dont blink
     } else {
-      blink = 0; // No influence outside the blink duration
+      nodes.Smile.morphTargetInfluences[0] = 0 // Dont blink
     }
 
+
+    // Ignore this. Code for the robot & pointer stuff.
     const x = (pointer.x * viewport.width) / 6
     const y = (pointer.y * viewport.height) / 6
     meshRef.current.lookAt(x, y, 1)
-
-    // Assuming `meshRef.current` and `nodes.Smile.morphTargetInfluences` are correctly set up to apply the effect
-    nodes.Smile.morphTargetInfluences[0] = blink;
 
   })
 
