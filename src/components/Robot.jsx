@@ -1,37 +1,47 @@
 import * as THREE from 'three';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import { easing } from 'maath'
 
 export function Robot(props) {
   const { nodes, materials } = useGLTF('/robot-transformed.glb');
+  const [dummy] = useState(() => new THREE.Object3D());
 
   const meshRef = useRef();
 
-  useFrame(({ pointer, viewport, clock }) => {
+
+  useFrame(({ pointer, viewport, clock, dt }) => {
 
     const elapsedTime = clock.getElapsedTime();
+
+    // Have the cycle mode be a random number from 1-5
     const cycleTime = 2; // Total cycle duration in seconds
-    const blinkDuration = 0.15; // Duration of the blink in seconds
+    const blinkDuration = 0.09; // Duration of the blink in seconds
+    const phase = (elapsedTime % cycleTime) / cycleTime; // Calculate current phase of the cycle
 
-    // To avoid resetting elapsedTime at each cycle, calculate the cycle's phase using % operator
-    const phase = (elapsedTime % cycleTime) / cycleTime;
-
-
-    // If the phase is less than the blink duration, blink
-    if (phase <= (blinkDuration / cycleTime)) {
-      nodes.Smile.morphTargetInfluences[0] = 1 // Blink
-
-      // If the phase is greater than the blink duration, dont blink
+    let blink;
+    if (phase <= blinkDuration) {
+      // Adjusted to make the blink happen in the first 0.5 seconds
+      if (phase <= blinkDuration / 2) {
+        blink = (phase / (blinkDuration / 2)) * 1; // From 0 to 1
+      } else {
+        blink = 1 - ((phase - (blinkDuration / 2)) / (blinkDuration / 2)); // From 1 back to 0
+      }
     } else {
-      nodes.Smile.morphTargetInfluences[0] = 0 // Dont blink
+      blink = 0; // No influence outside the blink duration
     }
+    nodes.Smile.morphTargetInfluences[0] = blink;
 
 
-    // Ignore this. Code for the robot & pointer stuff.
-    const x = (pointer.x * viewport.width) / 6
-    const y = (pointer.y * viewport.height) / 6
-    meshRef.current.lookAt(x, y, 1)
+    const x = (pointer.x * viewport.width) / 13
+    const y = (pointer.y * viewport.height) / 13
+    // meshRef.current.lookAt(x, y, 1)
+
+    dummy.lookAt(x, y, 1); // Use dummy for smooth lookAt
+    if (meshRef.current) {
+      easing.dampQ(meshRef.current.quaternion, dummy.quaternion, 0.2, dt); // Step 3
+    }
 
   })
 
@@ -92,13 +102,36 @@ export function Robot(props) {
     }
   };
 
+  const handleClick = () => {
+    // Open a youtube url in a new tab
+    window.open("https://www.youtube.com/watch?v=6ZfuNTqbHE8", "_blank");
+  }
+
+  // Function to revert cursor to default
+  const handlePointerOut = () => {
+    document.body.style.cursor = 'auto';
+  };
+
+  // Function to change cursor to pointer
+  const handlePointerOver = () => {
+    document.body.style.cursor = 'pointer';
+  };
+
+
   return (
-    <group {...props} dispose={null} ref={meshRef}>
+    <group {...props} dispose={null} ref={meshRef} onClick={() => {
+      handleClick();
+
+    }}>
       <mesh
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
         geometry={nodes.Computer_Head.geometry}
         material={materials.Computer}
       />
       <mesh
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
         geometry={nodes.Cube.geometry}
         material={materials.Parts}
         position={[1.995, 0.04, 0.378]}

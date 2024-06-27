@@ -1,4 +1,5 @@
 import './App.css';
+import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
 import { Robot } from './components/Robot';
 import { Stage, OrbitControls, Scroll, ScrollControls, Html } from '@react-three/drei'
@@ -17,8 +18,7 @@ function App() {
           <Stage intensity={0.5} environment="studio" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
             <Robot expression={expression} />
           </Stage>
-          <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableRotate={false} enablePan={false} />
-
+          <OrbitControls enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableRotate={false} enablePan={false} target={new THREE.Vector3(0, -0.7, 0)} position={new THREE.Vector3(0, 0, 0)} />
           <Scroll html style={{ width: '100%' }}>
 
             <div className="relative w-full h-screen">
